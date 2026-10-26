@@ -408,34 +408,39 @@ html, body {
    BOTTOM SECTION (DASA / KP SUMMARY + SIGNATURE WATERMARK)
    ============================================================ */
 .workspace-bottom {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  align-items: stretch;
-}
-
-@media (min-width: 1024px) {
-  .workspace-bottom {
-    grid-template-columns: 1.15fr 0.85fr;
-  }
+  width: 100%;
 }
 
 .summary-box {
   border: 1.5px solid var(--border-card);
   background-color: var(--bg-card);
-  padding: 12px 18px;
+  padding: 14px 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px 48px;
+}
+
+@media (min-width: 768px) {
+  .summary-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+
+.summary-col {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 5px;
+  gap: 8px;
 }
 
 .summary-row {
   display: flex;
   align-items: baseline;
-  gap: 10px;
-  font-size: 12.5px;
+  gap: 12px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -443,7 +448,7 @@ html, body {
   font-weight: 800;
   color: #ffffff;
   letter-spacing: 0.5px;
-  min-width: 135px;
+  min-width: 140px;
 }
 
 .summary-row .val {
@@ -455,83 +460,6 @@ html, body {
 
 .summary-row .val.highlight-dasa {
   color: #fcd34d;
-}
-
-/* ============================================================
-   BOTTOM RIGHT: ASTROCALL SEAL & EMBLEM
-   ============================================================ */
-.brand-seal-box {
-  border: 1.5px solid var(--border-card);
-  background: linear-gradient(135deg, #272a31 0%, #1e2027 100%);
-  padding: 14px 22px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 5px;
-  position: relative;
-  overflow: hidden;
-  user-select: none;
-}
-
-.brand-seal-box::before {
-  content: "";
-  position: absolute;
-  top: -30px;
-  right: -30px;
-  width: 90px;
-  height: 90px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.seal-badge {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1.6px;
-  color: var(--text-gold);
-  text-transform: uppercase;
-}
-
-.seal-brand {
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: 2.2px;
-  color: #ffffff;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, #ffffff 0%, #fef3c7 50%, #ffffff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.1;
-}
-
-.seal-tagline {
-  font-size: 11.5px;
-  font-weight: 500;
-  color: var(--text-muted);
-  letter-spacing: 0.5px;
-}
-
-.seal-meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.meta-pill {
-  font-size: 10px;
-  font-weight: 700;
-  color: #cbd5e1;
-  background: #333742;
-  border: 1px solid #4b5263;
-  padding: 3px 9px;
-  border-radius: 12px;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
 }
 
 /* ============================================================
@@ -738,30 +666,5 @@ html, body {
 
   .summary-row .val.highlight-dasa {
     color: #92400e !important;
-  }
-
-  .brand-seal-box {
-    background: #ffffff !important;
-    border-color: #374151 !important;
-    box-shadow: none !important;
-  }
-
-  .seal-badge {
-    color: #b45309 !important;
-  }
-
-  .seal-brand {
-    color: #111827 !important;
-    -webkit-text-fill-color: #111827 !important;
-  }
-
-  .seal-tagline {
-    color: #4b5563 !important;
-  }
-
-  .meta-pill {
-    background: #f3f4f6 !important;
-    color: #1f2937 !important;
-    border-color: #d1d5db !important;
   }
 }
