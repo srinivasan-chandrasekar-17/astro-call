@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AstroCall — Vedic Birth Chart Generator</title>
+  <meta name="description" content="Single-page offline Vedic Astrology birth chart generator with South Indian Rasi chart, planetary positions, Nakshatra, KP sub lords, and Vimshottari dasa." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Dancing+Script:wght@700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ================= TOP HEADER BAR ================= -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="app-logo">ASTRO-CALL</div>
+    </div>
+
+    <!-- Inline Compact Inputs -->
+    <div class="topbar-inputs" id="topbar-form">
+      <div class="input-block date-block" title="Date of Birth (DD / MM / YYYY)">
+        <input type="number" id="inp-day" min="1" max="31" value="19" placeholder="DD" class="num-box" />
+        <input type="number" id="inp-month" min="1" max="12" value="06" placeholder="MM" class="num-box" />
+        <input type="number" id="inp-year" min="1800" max="2100" value="1997" placeholder="YYYY" class="num-box year-box" />
+      </div>
+
+      <div class="input-block time-block" title="Time of Birth (HH : MM, 24-Hour)">
+        <input type="number" id="inp-hour" min="0" max="23" value="13" placeholder="HH" class="num-box" />
+        <input type="number" id="inp-min" min="0" max="59" value="15" placeholder="MM" class="num-box" />
+      </div>
+
+      <div class="input-block select-block">
+        <select id="sel-country" class="top-select" title="Country"></select>
+        <select id="sel-state" class="top-select" title="State / Region"></select>
+        <select id="sel-city" class="top-select" title="City"></select>
+      </div>
+
+      <button id="btn-show" class="btn-show" title="Calculate and Display Chart">SHOW</button>
+    </div>
+
+    <div class="topbar-actions">
+      <button id="btn-export-pdf" class="btn-action" title="Export PDF Certificate">PDF</button>
+      <button id="btn-print" class="btn-action" title="Print Chart">Print</button>
+      <button id="btn-settings-open" class="btn-action btn-icon" title="Ayanamsa & Settings">⚙</button>
+    </div>
+  </header>
+
+  <!-- ================= MAIN WORKSPACE (SINGLE PAGE) ================= -->
+  <main class="workspace" id="print-area">
+    
+    <!-- TOP SECTION: CHART + PLANETARY TABLE -->
+    <div class="workspace-top">
+      
+      <!-- LEFT: 4x4 South Indian Rāśi Chart -->
+      <section class="chart-panel" aria-label="South Indian Rasi Chart">
+        <div class="south-grid" id="south-grid">
+          <!-- 12 sign cells + center cell dynamically populated -->
+        </div>
+      </section>
+
+      <!-- RIGHT: Planetary Positions Table -->
+      <section class="table-panel" aria-label="Planetary Positions">
+        <div class="table-wrapper">
+          <table class="planet-table" id="planet-table">
+            <thead>
+              <tr>
+                <th>PLANET</th>
+                <th>SIGN</th>
+                <th>DEGREE</th>
+                <th>NAKSHATRA</th>
+                <th>LORD</th>
+              </tr>
+            </thead>
+            <tbody id="planet-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- BOTTOM SECTION: DASA / KP SUB LORDS + SIGNATURE -->
+    <div class="workspace-bottom">
+      
+      <!-- Bottom Left Box: Dasa & KP Sub Lords -->
+      <section class="summary-box" aria-label="Dasa and Sub Lord Details">
+        <div class="summary-row">
+          <span class="lbl">BAL OF DASA:</span>
+          <span class="val" id="val-bal-dasa">2Y 0M 22D</span>
+        </div>
+        <div class="summary-row">
+          <span class="lbl">PRESENT DASA:</span>
+          <span class="val" id="val-present-dasa">VENUS (2023-07-11 TO 2043-07-11)</span>
+        </div>
+        <div class="summary-row">
+          <span class="lbl">ASC NAKSHATRA:</span>
+          <span class="val" id="val-asc-nak">HASTA</span>
+        </div>
+        <div class="summary-row">
+          <span class="lbl">NAKSHATRA LORD:</span>
+          <span class="val" id="val-nak-lord">MOON</span>
+        </div>
+        <div class="summary-row">
+          <span class="lbl">SUB LORD:</span>
+          <span class="val" id="val-sub-lord">KETU</span>
+        </div>
+        <div class="summary-row">
+          <span class="lbl">SUB SUB LORD:</span>
+          <span class="val" id="val-subsub-lord">JUPITER</span>
+        </div>
+      </section>
+
+      <!-- Bottom Right Box: AstroCall Seal & Certified Emblem -->
+      <section class="brand-seal-box" aria-label="AstroCall Engine Seal">
+        <div class="seal-badge">✦ VEDIC HOROSCOPE ✦</div>
+        <div class="seal-brand">ASTROCALL</div>
+        <div class="seal-tagline">Precision Sidereal Astrological Engine</div>
+        <div class="seal-meta">
+          <span class="meta-pill">100% Offline</span>
+          <span class="meta-pill">Meeus Ephemeris</span>
+          <span class="meta-pill">KP Sub-Lords</span>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- ================= ADVANCED SETTINGS MODAL ================= -->
+  <div id="settings-modal" class="modal-overlay hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>✦ Chart Settings</h3>
+        <button id="btn-settings-close" class="modal-close" title="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <label for="inp-name">Client / Subject Name</label>
+          <input type="text" id="inp-name" value="" placeholder="e.g. Rahul Sharma" />
+        </div>
+        <div class="form-row">
+          <label for="sel-ayanamsa">Ayanamsa Model</label>
+          <select id="sel-ayanamsa">
+            <option value="lahiri" selected>Lahiri (Chitrapaksha) — Standard</option>
+            <option value="raman">B.V. Raman</option>
+            <option value="kpnew">KP New (Krishnamurti)</option>
+            <option value="yukteshwar">Sri Yukteshwar</option>
+            <option value="fagan">Fagan-Bradley</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="inp-custom-lat">Custom Latitude <span class="subtext">(optional override)</span></label>
+          <input type="number" id="inp-custom-lat" step="0.0001" placeholder="e.g. 13.0827" />
+        </div>
+        <div class="form-row">
+          <label for="inp-custom-lon">Custom Longitude <span class="subtext">(optional override)</span></label>
+          <input type="number" id="inp-custom-lon" step="0.0001" placeholder="e.g. 80.2707" />
+        </div>
+        <div class="form-row">
+          <label for="inp-custom-tz">Timezone</label>
+          <input type="text" id="inp-custom-tz" value="Asia/Kolkata" placeholder="e.g. Asia/Kolkata" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-settings-apply" class="btn-modal-primary">Apply Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="cities.js"></script>
+  <script src="astro.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

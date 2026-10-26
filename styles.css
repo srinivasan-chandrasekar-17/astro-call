@@ -1,0 +1,767 @@
+/* ============================================================
+   styles.css — AstroChart Single-Page Vedic Astrology Theme
+   ============================================================ */
+
+:root {
+  --bg-main: #22242a;
+  --bg-topbar: #181a1f;
+  --bg-card: #272a31;
+  --bg-input: #383c47;
+  --border-card: #828898;
+  --border-cell: #5d6373;
+  --border-input: #5a6070;
+  
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --text-dim: #6b7280;
+  --text-gold: #f59e0b;
+  --btn-gold: #e69500;
+  --btn-gold-hover: #d98200;
+
+  --watermark-red: #c94040;
+  --watermark-serif: #a83232;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-cursive: 'Dancing Script', 'Brush Script MT', cursive;
+  --font-serif: 'Times New Roman', Times, serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   TOPBAR
+   ============================================================ */
+.topbar {
+  width: 100%;
+  height: 52px;
+  background-color: var(--bg-topbar);
+  border-bottom: 1.5px solid #3a3f4d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.app-logo {
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.topbar-inputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.input-block {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.num-box {
+  width: 44px;
+  height: 32px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-input);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 2px;
+  padding: 0 2px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.num-box:focus {
+  border-color: var(--text-gold);
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25);
+}
+
+.year-box {
+  width: 58px;
+}
+
+/* Chrome, Safari, Edge, Opera: remove spinner arrows */
+.num-box::-webkit-outer-spin-button,
+.num-box::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.num-box[type=number] {
+  -moz-appearance: textfield;
+}
+
+.top-select {
+  height: 32px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-input);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 2px;
+  padding: 0 8px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+#sel-country {
+  min-width: 80px;
+  max-width: 95px;
+}
+
+#sel-state {
+  min-width: 110px;
+  max-width: 130px;
+}
+
+#sel-city {
+  min-width: 135px;
+  max-width: 185px;
+}
+
+.top-select option {
+  background-color: #1e293b;
+  color: #ffffff;
+  padding: 4px 8px;
+}
+
+.top-select:focus {
+  border-color: var(--text-gold);
+}
+
+.btn-show {
+  height: 32px;
+  padding: 0 22px;
+  background-color: var(--btn-gold);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.8px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.15s, transform 0.05s;
+}
+
+.btn-show:hover {
+  background-color: var(--btn-gold-hover);
+}
+
+.btn-show:active {
+  transform: translateY(1px);
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-action {
+  height: 30px;
+  padding: 0 10px;
+  background: #2b2e38;
+  border: 1px solid #484e5e;
+  color: #d1d5db;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-action:hover {
+  background: #373b47;
+  color: #ffffff;
+  border-color: #636b80;
+}
+
+.btn-icon {
+  font-size: 14px;
+  padding: 0 8px;
+}
+
+/* ============================================================
+   MAIN WORKSPACE LAYOUT
+   ============================================================ */
+.workspace {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.workspace-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .workspace-top {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+
+/* ============================================================
+   SOUTH INDIAN 4x4 RĀŚI CHART
+   ============================================================ */
+.chart-panel {
+  width: 100%;
+}
+
+.south-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 100px);
+  border: 1.5px solid var(--border-card);
+  background-color: var(--bg-card);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  user-select: none;
+}
+
+@media (min-width: 1200px) {
+  .south-grid {
+    grid-template-rows: repeat(4, 115px);
+  }
+}
+
+.grid-cell {
+  border: 1px solid var(--border-cell);
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  background-color: #262931;
+  transition: background-color 0.15s;
+}
+
+.grid-cell:hover {
+  background-color: #2d303a;
+}
+
+.cell-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #b0b7c7;
+  text-transform: uppercase;
+}
+
+.cell-planets {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+  margin-top: auto;
+  margin-bottom: auto;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+.cell-planets .lagna-highlight {
+  color: #fbbf24;
+}
+
+/* Center 2x2 merged blank square */
+.grid-center {
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+  border: 1px solid var(--border-cell);
+  background: radial-gradient(circle, #252830 0%, #1e2026 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.grid-center::before {
+  content: "";
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(130, 136, 152, 0.2);
+  transform: rotate(45deg);
+}
+
+/* ============================================================
+   PLANETARY POSITIONS TABLE
+   ============================================================ */
+.table-panel {
+  width: 100%;
+}
+
+.table-wrapper {
+  border: 1.5px solid var(--border-card);
+  background-color: var(--bg-card);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.planet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.planet-table th {
+  background-color: #2b2e38;
+  color: #f3f4f6;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1.5px solid var(--border-cell);
+  border-right: 1px solid var(--border-cell);
+  text-transform: uppercase;
+}
+
+.planet-table th:last-child {
+  border-right: none;
+}
+
+.planet-table td {
+  padding: 6.5px 12px;
+  font-weight: 600;
+  color: #e5e7eb;
+  border-bottom: 1px solid var(--border-cell);
+  border-right: 1px solid var(--border-cell);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.planet-table td:last-child {
+  border-right: none;
+}
+
+.planet-table tr:last-child td {
+  border-bottom: none;
+}
+
+.planet-table tbody tr:nth-child(even) {
+  background-color: #23252d;
+}
+
+.planet-table tbody tr:hover {
+  background-color: #2f333e;
+}
+
+.planet-table td.col-deg {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.planet-table tr.row-lagna td {
+  background-color: rgba(245, 158, 11, 0.08);
+}
+.planet-table tr.row-lagna td:first-child {
+  color: #fbbf24;
+  font-weight: 800;
+}
+
+/* ============================================================
+   BOTTOM SECTION (DASA / KP SUMMARY + SIGNATURE WATERMARK)
+   ============================================================ */
+.workspace-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+@media (min-width: 1024px) {
+  .workspace-bottom {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+
+.summary-box {
+  border: 1.5px solid var(--border-card);
+  background-color: var(--bg-card);
+  padding: 12px 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.summary-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.summary-row .lbl {
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  min-width: 135px;
+}
+
+.summary-row .val {
+  font-weight: 700;
+  color: #f3f4f6;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.summary-row .val.highlight-dasa {
+  color: #fcd34d;
+}
+
+/* ============================================================
+   BOTTOM RIGHT: ASTROCALL SEAL & EMBLEM
+   ============================================================ */
+.brand-seal-box {
+  border: 1.5px solid var(--border-card);
+  background: linear-gradient(135deg, #272a31 0%, #1e2027 100%);
+  padding: 14px 22px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.brand-seal-box::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.seal-badge {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  color: var(--text-gold);
+  text-transform: uppercase;
+}
+
+.seal-brand {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 2.2px;
+  color: #ffffff;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #ffffff 0%, #fef3c7 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+
+.seal-tagline {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.seal-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.meta-pill {
+  font-size: 10px;
+  font-weight: 700;
+  color: #cbd5e1;
+  background: #333742;
+  border: 1px solid #4b5263;
+  padding: 3px 9px;
+  border-radius: 12px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   SETTINGS MODAL
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: opacity 0.2s;
+}
+
+.modal-overlay.hidden {
+  display: none;
+}
+
+.modal-dialog {
+  width: 90%;
+  max-width: 440px;
+  background-color: #272a32;
+  border: 1.5px solid var(--border-card);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 14px 18px;
+  background-color: #1e2027;
+  border-bottom: 1px solid #404654;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f3f4f6;
+  letter-spacing: 0.5px;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: #ffffff;
+}
+
+.modal-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-row label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #d1d5db;
+}
+
+.form-row label .subtext {
+  font-size: 11px;
+  font-weight: 400;
+  color: #9ca3af;
+}
+
+.form-row input,
+.form-row select {
+  height: 34px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-input);
+  color: #ffffff;
+  padding: 0 10px;
+  font-size: 12.5px;
+  border-radius: 2px;
+  outline: none;
+}
+
+.form-row input:focus,
+.form-row select:focus {
+  border-color: var(--text-gold);
+}
+
+.modal-footer {
+  padding: 12px 18px;
+  background-color: #1e2027;
+  border-top: 1px solid #404654;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-modal-primary {
+  height: 32px;
+  padding: 0 18px;
+  background-color: var(--btn-gold);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 12px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.btn-modal-primary:hover {
+  background-color: var(--btn-gold-hover);
+}
+
+/* ============================================================
+   PRINT MEDIA STYLES (A4 LANDSCAPE READY)
+   ============================================================ */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 8mm 10mm;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  .topbar,
+  .modal-overlay {
+    display: none !important;
+  }
+
+  .workspace {
+    max-width: 100% !important;
+    padding: 0 !important;
+    gap: 12px !important;
+  }
+
+  .south-grid,
+  .table-wrapper,
+  .summary-box {
+    background-color: #ffffff !important;
+    border-color: #374151 !important;
+    box-shadow: none !important;
+  }
+
+  .grid-cell {
+    background-color: #ffffff !important;
+    border-color: #4b5563 !important;
+  }
+
+  .cell-label {
+    color: #374151 !important;
+  }
+
+  .cell-planets {
+    color: #111827 !important;
+  }
+
+  .cell-planets .lagna-highlight {
+    color: #b45309 !important;
+  }
+
+  .grid-center {
+    background: #f9fafb !important;
+    border-color: #4b5563 !important;
+  }
+
+  .planet-table th {
+    background-color: #f3f4f6 !important;
+    color: #111827 !important;
+    border-color: #4b5563 !important;
+  }
+
+  .planet-table td {
+    color: #111827 !important;
+    border-color: #4b5563 !important;
+  }
+
+  .planet-table tbody tr:nth-child(even) {
+    background-color: #f9fafb !important;
+  }
+
+  .summary-row .lbl {
+    color: #111827 !important;
+  }
+
+  .summary-row .val {
+    color: #1f2937 !important;
+  }
+
+  .summary-row .val.highlight-dasa {
+    color: #92400e !important;
+  }
+
+  .brand-seal-box {
+    background: #ffffff !important;
+    border-color: #374151 !important;
+    box-shadow: none !important;
+  }
+
+  .seal-badge {
+    color: #b45309 !important;
+  }
+
+  .seal-brand {
+    color: #111827 !important;
+    -webkit-text-fill-color: #111827 !important;
+  }
+
+  .seal-tagline {
+    color: #4b5563 !important;
+  }
+
+  .meta-pill {
+    background: #f3f4f6 !important;
+    color: #1f2937 !important;
+    border-color: #d1d5db !important;
+  }
+}
