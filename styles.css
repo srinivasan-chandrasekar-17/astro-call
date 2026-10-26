@@ -232,15 +232,17 @@ html, body {
 }
 
 .workspace-top {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  align-items: start;
+  align-items: stretch;
 }
 
 @media (min-width: 1024px) {
   .workspace-top {
+    display: grid;
     grid-template-columns: 1.15fr 0.85fr;
+    align-items: start;
   }
 }
 
@@ -254,11 +256,24 @@ html, body {
 .south-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 100px);
+  grid-template-rows: repeat(4, 1fr);
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
   border: 1.5px solid var(--border-card);
   background-color: var(--bg-card);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
   user-select: none;
+}
+
+@media (min-width: 1024px) {
+  .south-grid {
+    max-width: 100%;
+    margin: 0;
+    aspect-ratio: auto;
+    grid-template-rows: repeat(4, 100px);
+  }
 }
 
 @media (min-width: 1200px) {
@@ -337,7 +352,8 @@ html, body {
   border: 1.5px solid var(--border-card);
   background-color: var(--bg-card);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
-  overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .planet-table {
@@ -584,6 +600,215 @@ html, body {
 
 .btn-modal-primary:hover {
   background-color: var(--btn-gold-hover);
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN SYSTEM (MOBILE, TABLET & DESKTOP)
+   ============================================================ */
+@media (max-width: 1023px) {
+  .topbar {
+    height: auto;
+    padding: 10px 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .topbar-left {
+    order: 1;
+  }
+
+  .topbar-actions {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .topbar-inputs {
+    order: 3;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .date-block {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .time-block {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .btn-show {
+    flex: 1 1 auto;
+    min-width: 70px;
+    height: 34px;
+  }
+
+  .select-block {
+    width: 100%;
+    display: flex;
+    gap: 6px;
+  }
+
+  .top-select {
+    height: 34px;
+    font-size: 11.5px;
+  }
+
+  #sel-country {
+    flex: 1 1 25%;
+    max-width: none;
+    min-width: 0;
+  }
+
+  #sel-state {
+    flex: 1.2 1 35%;
+    max-width: none;
+    min-width: 0;
+  }
+
+  #sel-city {
+    flex: 1.6 1 40%;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .workspace {
+    padding: 12px 12px 24px;
+    gap: 14px;
+  }
+
+  .grid-cell {
+    padding: 4px 6px;
+  }
+
+  .cell-label {
+    font-size: 10px;
+  }
+
+  .cell-planets {
+    font-size: 11px;
+    line-height: 1.25;
+  }
+
+  .planet-table {
+    min-width: 380px;
+  }
+
+  .planet-table th,
+  .planet-table td {
+    padding: 8px 6px;
+    font-size: 11.5px;
+  }
+
+  .summary-box {
+    padding: 12px 16px;
+  }
+
+  .summary-row {
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  .summary-row .lbl {
+    min-width: 125px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .app-logo {
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
+
+  .num-box {
+    width: 38px;
+    height: 32px;
+    font-size: 12px;
+    padding: 0 1px;
+  }
+
+  .year-box {
+    width: 48px;
+  }
+
+  .btn-show {
+    height: 32px;
+    font-size: 12px;
+    padding: 0 12px;
+  }
+
+  .btn-action {
+    height: 28px;
+    padding: 0 8px;
+    font-size: 10.5px;
+  }
+
+  .top-select {
+    height: 32px;
+    font-size: 11px;
+    padding: 0 4px;
+  }
+
+  .workspace {
+    padding: 8px 8px 20px;
+    gap: 12px;
+  }
+
+  .south-grid {
+    max-width: 100%;
+  }
+
+  .grid-cell {
+    padding: 3px 4px;
+  }
+
+  .cell-label {
+    font-size: 9px;
+    letter-spacing: 0.2px;
+  }
+
+  .cell-planets {
+    font-size: 9.5px;
+    line-height: 1.2;
+  }
+
+  .grid-center::before {
+    width: 36px;
+    height: 36px;
+  }
+
+  .planet-table th,
+  .planet-table td {
+    padding: 6px 4px;
+    font-size: 11px;
+  }
+
+  .summary-box {
+    padding: 10px 12px;
+  }
+
+  .summary-row {
+    font-size: 11px;
+  }
+
+  .summary-row .lbl {
+    min-width: 110px;
+    font-size: 10px;
+  }
+
+  .summary-row .val {
+    font-size: 11px;
+  }
 }
 
 /* ============================================================
