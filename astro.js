@@ -125,11 +125,14 @@
   // Timezone Offset Calculation
   function getUTCOffsetHours(tzName, dateObj) {
     try {
-      const utcStr = dateObj.toLocaleString('en-US', { timeZone: 'UTC', hour12: false,
+      const utcStr = dateObj.toLocaleString('en-US', { timeZone: 'UTC', hourCycle: 'h23',
         year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      const tzStr = dateObj.toLocaleString('en-US', { timeZone: tzName, hour12: false,
+      const tzStr = dateObj.toLocaleString('en-US', { timeZone: tzName, hourCycle: 'h23',
         year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
       const offsetMs = new Date(tzStr) - new Date(utcStr);
+      if (!Number.isFinite(offsetMs)) {
+        return 5.5;
+      }
       return offsetMs / 3600000.0;
     } catch (e) {
       return 5.5; // Default Indian Standard Time (+05:30)

@@ -13,6 +13,7 @@
 <body>
 
   <!-- ================= TOP HEADER BAR ================= -->
+  <div class="topbar-sticky">
   <header class="topbar">
     <div class="topbar-left">
       <div class="app-logo">ASTRO-CALL</div>
@@ -21,14 +22,18 @@
     <!-- Inline Compact Inputs -->
     <div class="topbar-inputs" id="topbar-form">
       <div class="input-block date-block" title="Date of Birth (DD / MM / YYYY)">
-        <input type="number" id="inp-day" min="1" max="31" value="19" placeholder="DD" class="num-box" />
-        <input type="number" id="inp-month" min="1" max="12" value="06" placeholder="MM" class="num-box" />
-        <input type="number" id="inp-year" min="1800" max="2100" value="1997" placeholder="YYYY" class="num-box year-box" />
+        <input type="text" inputmode="numeric" maxlength="2" autocomplete="off" id="inp-day" value="19" placeholder="DD" class="num-box" aria-label="Birth Day (01 to 31)" />
+        <input type="text" inputmode="numeric" maxlength="2" autocomplete="off" id="inp-month" value="06" placeholder="MM" class="num-box" aria-label="Birth Month (01 to 12)" />
+        <input type="text" inputmode="numeric" maxlength="4" autocomplete="off" id="inp-year" value="1997" placeholder="YYYY" class="num-box year-box" aria-label="Birth Year (1800 to 2100)" />
       </div>
 
-      <div class="input-block time-block" title="Time of Birth (HH : MM, 24-Hour)">
-        <input type="number" id="inp-hour" min="0" max="23" value="13" placeholder="HH" class="num-box" />
-        <input type="number" id="inp-min" min="0" max="59" value="15" placeholder="MM" class="num-box" />
+      <div class="input-block time-block" title="Time of Birth (HH : MM, 12-Hour AM/PM)">
+        <input type="text" inputmode="numeric" maxlength="2" autocomplete="off" id="inp-hour" value="01" placeholder="HH" class="num-box" aria-label="Birth Hour (01 to 12)" />
+        <input type="text" inputmode="numeric" maxlength="2" autocomplete="off" id="inp-min" value="15" placeholder="MM" class="num-box" aria-label="Birth Minute (00 to 59)" />
+        <select id="sel-ampm" class="top-select ampm-select" title="AM / PM" aria-label="AM or PM">
+          <option value="AM">AM</option>
+          <option value="PM" selected>PM</option>
+        </select>
       </div>
 
       <div class="input-block select-block">
@@ -46,6 +51,13 @@
       <button id="btn-settings-open" class="btn-action btn-icon" title="Ayanamsa & Settings">⚙</button>
     </div>
   </header>
+
+  <!-- Inline Validation Error Banner -->
+  <div id="validation-banner" class="validation-banner hidden" role="alert" aria-live="polite">
+    <span class="validation-icon" aria-hidden="true">&#9888;</span>
+    <span id="validation-message" class="validation-message"></span>
+  </div>
+  </div>
 
   <!-- ================= MAIN WORKSPACE (SINGLE PAGE) ================= -->
   <main class="workspace" id="print-area">
